@@ -135,7 +135,7 @@ public class Doubt : BaseNPC
 		return dist;
 	}
 
-	public int health = 10;
+	public int health = 15;
 	public float rushSpeed = 10f;
 	private bool reached = false;
 
@@ -153,7 +153,7 @@ public class Doubt : BaseNPC
 		if (this.state == DoubtState.Idle) return;
 		EnvironmentController.Instance.gameManager.Broadcast("doubtHit");
 		health--;
-		if (health <= 2)
+		if (health <= 1)
 		{
 			audMan.PlaySound(glitchVoiceline);
 			playerMan.frozen = true;

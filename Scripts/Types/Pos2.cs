@@ -16,6 +16,12 @@ public struct Pos2
 		this.y = y;
 	}
 
+	public Pos2(float x, float y)
+	{
+		this.x = Mathf.RoundToInt(x);
+		this.y = Mathf.RoundToInt(y);
+	}
+
 	public Pos2(Vector3 vector)
 	{
 		this.x = Mathf.RoundToInt(vector.x);

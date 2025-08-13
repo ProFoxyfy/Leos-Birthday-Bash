@@ -7,7 +7,7 @@ public class EndlessGameManager : BaseGameManager
 	public TextAsset levelData;
 	public TextAsset posterData;
 
-	private int collected = 0;
+	public int collected = 0;
 	private float anger = 0.004f;
 	PremadeGenerator generator;
 

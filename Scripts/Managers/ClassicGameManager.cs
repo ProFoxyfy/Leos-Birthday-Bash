@@ -230,6 +230,7 @@ public class ClassicGameManager : BaseGameManager
 			ec.GetPlayer(0).staminaRegenTime = 2;
 			ec.GetPlayer(0).walkSpeed = 1.5f;
 			ec.GetPlayer(0).runSpeed = 3f;
+			ec.GetPlayer(0).disableSprint = false;
 			ec.GetPlayer(0).staminaRegen = 0.05f;
 			ec.GetPlayer(0).stamina = 100f;
 			ec.GetPlayer(0).staminaDecrement = 0f;
@@ -277,6 +278,7 @@ public class ClassicGameManager : BaseGameManager
 		ec.GetPlayer(0).staminaRegenTime = 0;
 		ec.GetPlayer(0).staminaRegen = 0f;
 		ec.GetPlayer(0).stamina = 0f;
+		ec.GetPlayer(0).disableSprint = true;
 		ec.GetPlayer(0).walkSpeed = 3.5f;
 		ec.GetPlayer(0).runSpeed = 3.5f;
 		ec.GetPlayer(0).ChangeFOV(80f);

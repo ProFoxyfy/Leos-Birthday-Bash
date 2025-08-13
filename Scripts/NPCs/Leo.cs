@@ -12,7 +12,7 @@ public class Leo : BaseNPC
 	public Sprite angrySprite;
 	public Sprite happySpriteJolly;
 
-	float speed = 7f;
+	float speed = 9.5f;
 	float slapDelay = 1.5f;
 	float slapDuration = 0.2f;
 	float time = 0f;
@@ -36,7 +36,9 @@ public class Leo : BaseNPC
 	Transform player;
 
 	internal bool blind = false;
+	internal bool blindFun = false;
 	internal bool canEndGame = true;
+	internal bool canEndGameFun = true;
 	internal bool frozen = false;
 
 	private BehaviorEvaluator evaluator;
@@ -138,7 +140,7 @@ public class Leo : BaseNPC
 			return;
 		}
 
-		if (CanReach(player.position, layerMask) && !blind)
+		if (CanReach(player.position, layerMask) && !(blind || blindFun))
 		{
 			currentNoiseValue = 127;
 			nextTarget = player.position;
@@ -192,7 +194,7 @@ public class Leo : BaseNPC
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (!canEndGame) return;
+		if (!canEndGame || !canEndGameFun) return;
 		if (jumpscare) return;
 		if (!other.transform.CompareTag("Player")) return;
 		MusicManager.Instance.StopAll();

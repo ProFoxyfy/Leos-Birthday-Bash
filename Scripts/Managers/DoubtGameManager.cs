@@ -190,6 +190,7 @@ public class DoubtGameManager : BaseGameManager
 		ec.GetPlayer(0).staminaRegenTime = 0;
 		ec.GetPlayer(0).staminaRegen = 0f;
 		ec.GetPlayer(0).stamina = 0f;
+		ec.GetPlayer(0).disableSprint = true;
 		ec.GetPlayer(0).walkSpeed = 3.5f;
 		ec.GetPlayer(0).runSpeed = 3.5f;
 		ec.GetPlayer(0).ChangeFOV(80f);
@@ -253,6 +254,7 @@ public class DoubtGameManager : BaseGameManager
 				DebugManager.Log($"Reached exit w/ id {id}, n exits reached: {exitCount}");
 				if (exitCount == 3)
 				{
+					plr.ClearInventory();
 					MusicManager.Instance.StopAll();
 					finalExitId = id;
 					finalExit = true;

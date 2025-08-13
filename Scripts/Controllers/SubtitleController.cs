@@ -64,6 +64,9 @@ public class SubtitleController : MonoBehaviour
 		else if (timer > 0f)
 			timer -= Time.unscaledDeltaTime;
 
+		if (this.hasPosition && origin == null)
+			Destroy(gameObject);
+
 		if (this.hasPosition)
 			this.PositionSubtitle();
 		else

@@ -50,6 +50,7 @@ public class PlayerManager : MonoBehaviour
 	public Image[] itemImages;
 	public TMP_Text itemTxt;
 	internal ItemData itmData;
+	public bool infItems = false;
 
 	public float baseFOV = 60f;
 	public float sprintFOV = 20f; // FOV increase when sprinting
@@ -223,7 +224,11 @@ public class PlayerManager : MonoBehaviour
 		BaseItem slot = inventory[selectedSlot];
 		if (slot == null) return;
 		slot.Use(this);
-		inventory[selectedSlot] = null;
+		if (!infItems)
+		{
+			Destroy(slot.gameObject);
+			inventory[selectedSlot] = null;
+		}
 		UpdateSlots();
 	}
 
@@ -367,7 +372,7 @@ public class PlayerManager : MonoBehaviour
 			leo = FindObjectOfType<Leo>();
 		if (doubt == null)
 			doubt = FindObjectOfType<Doubt>();
-		if (other.gameObject.CompareTag("Leo") && ((leo != null && leo.canEndGame) || (doubt != null && doubt.canEndGame)))
+		if (other.gameObject.CompareTag("Leo") && ((leo != null && leo.canEndGame && leo.canEndGameFun) || (doubt != null && doubt.canEndGame)))
 		{
 			jumpscare = true;
 			if (doubt != null)
