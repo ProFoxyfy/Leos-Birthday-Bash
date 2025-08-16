@@ -98,8 +98,6 @@ public class ContinueScreen : MonoBehaviour
 		infoT = Mathf.Round(infoTX);
 		glowT = Mathf.Round(glowTX);
 
-		Debug.LogWarning(titleT);
-
 		title.alpha = titleT / max;
 		info.alpha = infoT / max;
 		glow.color = new Color(origGlowColor.r, origGlowColor.g, origGlowColor.b, glowT / max);

@@ -16,4 +16,5 @@ public class UIStyle : ScriptableObject
 	public UITransitionObject transition;
 	[Header("SFX")]
 	public AudioObject hoverSound;
+	public AudioObject clickSound;
 }

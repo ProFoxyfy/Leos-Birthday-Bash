@@ -195,7 +195,11 @@ public class Button : MonoBehaviour, IClickable
 	public void Up()
 	{
 		if (state == ClickableState.Down)
+		{
+			if (hoverSound)
+				audMan.PlayOneShot(GlobalsManager.Instance.style.clickSound);
 			onClick.Invoke();
+		}
 		SetState(ClickableState.None);
 	}
 

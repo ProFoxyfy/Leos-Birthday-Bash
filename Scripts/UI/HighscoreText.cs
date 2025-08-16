@@ -12,6 +12,7 @@ public class HighscoreText : MonoBehaviour
 
 	void Start()
 	{
-		text.text = "Highscore: " + FlagManager.Instance.GetFlag(5);
+		// oops i did it again silly me
+		text.text = string.Format(LocalizationManager.Instance.GetLocalizedString("MSL_HighscoreFormat", LangStringType.Menu)[0], FlagManager.Instance.GetFlag(5));
 	}
 }

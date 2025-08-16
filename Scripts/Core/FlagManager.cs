@@ -52,6 +52,18 @@ public class FlagManager : Singleton<FlagManager>
 		["invertY"] = false
 	};
 
+	public int CountEndings()
+	{
+		int count = 0;
+
+		// also since flags are 0/1 we can just add them together to get the amount of
+		// endings finished
+		for (int i = 0; i< 4; i++)
+			count += GetFlag(i);
+
+		return count;
+	}
+
 	private void Awake()
 	{
 		DontDestroyOnLoad(this);

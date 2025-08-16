@@ -12,6 +12,8 @@ public class ItemData : ScriptableObject
 		[ItemType.ChocolateKiss] = typeof(ITM_ChocoKiss)
 	};
 	[SerializedDictionary]
+	public SerializedDictionary<ItemType, AudioObject> useSound;
+	[SerializedDictionary]
 	public SerializedDictionary<ItemType, Sprite> smallSprite;
 	[SerializedDictionary]
 	public SerializedDictionary<ItemType, Sprite> sprite;

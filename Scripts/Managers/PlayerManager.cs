@@ -224,6 +224,8 @@ public class PlayerManager : MonoBehaviour
 		BaseItem slot = inventory[selectedSlot];
 		if (slot == null) return;
 		slot.Use(this);
+		if (itmData.useSound.ContainsKey(slot.type))
+			audMan.PlayOneShot(itmData.useSound[slot.type]);
 		if (!infItems)
 		{
 			Destroy(slot.gameObject);
@@ -340,7 +342,12 @@ public class PlayerManager : MonoBehaviour
 		Image slot = slots[selectedSlot];
 		BaseItem currentItem = inventory[selectedSlot];
 		slot.color = selectedColor;
-		itemTxt.text = currentItem != null ? LocalizationManager.Instance.GetLocalizedString(itmData.nameKeys[currentItem.type], LangStringType.Menu)[0] : "Nothing";
+		itemTxt.text = 
+			currentItem != null ? 
+			LocalizationManager.Instance.GetLocalizedString(itmData.nameKeys[currentItem.type], LangStringType.Menu)[0]
+			:
+			LocalizationManager.Instance.GetLocalizedString("ITM_Nothing", LangStringType.Menu)[0]
+			;
 	}
 
 	IEnumerator ExitToMenuDelay(float delay)

@@ -4,18 +4,17 @@ public class CoreInitializer : MonoBehaviour
 {
 	public static bool hasLoaded = false;
 	public static Vector2 uiResolution = new Vector2(480, 360);
+	public const string version = "1.2";
 
 	private void Awake()
 	{
-
 		GlobalsManager.Instance.style = Resources.Load<UIStyle>("DefaultStyle");
 
 		MusicManager.Instance.sampleLoudness = false;
 		MusicManager.Instance.SetVolume(1f);
 		MusicManager.Instance.audioSource.pitch = 1f;
-
+		
 		SubtitleManager.Instance.Init();
-
 		UICamera.Instance.Initialize();
 
 		Shader.SetGlobalFloat("_VertexGlitchStrength", 0f);
@@ -26,6 +25,9 @@ public class CoreInitializer : MonoBehaviour
 			FlagManager.Instance.LoadSettings();
 			FlagManager.Instance.Load();
 		}
+
+		if (RichPresenceManager.Instance.loaded)
+			RichPresenceManager.Instance.UpdateActivity();
 
 		// BUG: This prevents the CoreInitializer from running in the editor under certain circumstances.
 		Language gameLang;
@@ -42,6 +44,9 @@ public class CoreInitializer : MonoBehaviour
 			return;
 		}
 		hasLoaded = true;
+
+		RichPresenceManager.Instance.Init();
+		RichPresenceManager.Instance.UpdateActivity();
 
 		FlagManager.Instance.LoadSettings();
 		FlagManager.Instance.Load();
@@ -61,6 +66,7 @@ public class CoreInitializer : MonoBehaviour
 	private void OnApplicationQuit()
 	{
 		hasLoaded = false;
+		RichPresenceManager.Instance.loaded = false;
 	}
 
 	private void OnGUI()

@@ -16,11 +16,8 @@ public class EndingText : MonoBehaviour
 
 	private void Start()
 	{
-		// cleaned this up :D
-		// also since flags are 0/1 we can just add them together to get the amount of
-		// endings finished
-		for (int i = 0; i < 4; i++)
-			count += FlagManager.Instance.GetFlag(i);
+		// cleaned this up further :D
+		count = FlagManager.Instance.CountEndings();
 
 		int didHelp = FlagManager.Instance.GetFlag(1);
 		int didDead = FlagManager.Instance.GetFlag(0);
@@ -38,7 +35,9 @@ public class EndingText : MonoBehaviour
 		bool hasAllTapes = FlagManager.Instance.GetFlag(16) == 1 && FlagManager.Instance.GetFlag(17) == 1;
 
 		// future-proofed :D
-		text.text = "Endings: " + count.ToString() + "/" + maximum.ToString();
+		// nah who forgot to make this a translation string >:(
+		// oh right I'm the sole developer of this
+		text.text = string.Format(LocalizationManager.Instance.GetLocalizedString("MSL_EndingsFormat", LangStringType.Menu)[0], count, maximum);
 
 		bool readyForTrueEndings = didHelp == 1 && didDead == 1 && hasAllDiaryEntries && hasAllTapes;
 		bool gameFinished = count == maximum;
