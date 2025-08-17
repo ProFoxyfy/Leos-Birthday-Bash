@@ -47,6 +47,9 @@ public class ContinueScreen : MonoBehaviour
 		infoTM.useUnscaled = true;
 		glowTM.useUnscaled = true;
 
+		EnvironmentController.Instance.UnloadLevel();
+		EnvironmentController.Instance.FillLightmap(Color.black);
+
 		audMan.PlaySound(music);
 
 		titleTM.PlayTweenSingle(ref titleTX, tween);

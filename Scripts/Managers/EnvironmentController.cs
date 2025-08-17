@@ -230,6 +230,11 @@ public class EnvironmentController : Singleton<EnvironmentController>
 		return ctrl;
 	}
 
+	public void UnloadLevel()
+	{
+		Destroy(tileContainer.gameObject);
+	}
+
 	public void ExitToMenu()
 	{
 		UICamera.Instance.SetOverlay(false);
