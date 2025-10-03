@@ -15,6 +15,7 @@ public class FinaleLeo : BaseNPC
 	GameObject screenInst;
 
 	// Obligatory comment that serves zero purpose
+	// Kill me please :3
 
 	void Awake()
 	{
@@ -51,6 +52,8 @@ public class FinaleLeo : BaseNPC
 		{
 			// no credits yet
 			// TODO: add them lol
+			// TODO: remove this comment
+			// TODO: cure own depression
 			light.visible = false;	
 		}
 

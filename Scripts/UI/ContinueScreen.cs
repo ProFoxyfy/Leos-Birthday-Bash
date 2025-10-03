@@ -66,6 +66,7 @@ public class ContinueScreen : MonoBehaviour
 
 	private void Awake()
 	{
+		// :(
 		audMan = gameObject.AddComponent<AudioManager>();
 
 		title = titleTM.gameObject.GetComponent<TMP_Text>();
