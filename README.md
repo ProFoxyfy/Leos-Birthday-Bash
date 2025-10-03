@@ -7,6 +7,15 @@ This repository only contains code assets.
 
 # License
 License is included in this repository. Please read it before you do anything fancy.
+It was not written by a lawyer, so hopefully you can understand it.
+
+In simple terms (And don't use this in place of the license, this is merely a summary, the summary is not legally binding, and it may have errors):
+- Include the license notice as a file somewhere easily accessible (including the ASCII kitten) if you modify this code in any distributions of the software.
+- Credit me, don't claim it as your own. If you include the notice, you're good to go.
+- If anything happens, your fault, and you can't request personal info from me. I am a developer, not an insurance company.
+- You can't re-sell the code by itself.
+- Don't exploit loopholes. Use intent *and* wording. Otherwise you've breached the contract, and Leo will be sad.
+- Be silly. (I can't enforce this though. Be sad or serious or whatever.)
 
 # How to contribute
 You don't. I'll gladly use this as an issue tracker, but I'm certainly not interested in legal jargon for obvious reasons.
