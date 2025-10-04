@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YamlDotNet.Serialization;
 
 public class FlagManager : Singleton<FlagManager>
 {
@@ -26,6 +27,12 @@ public class FlagManager : Singleton<FlagManager>
 	public static string settingsFilePath;
 	public static string saveFile = "save.dat";
 	public static string saveFilePath;
+	public static string gameVarFile = "config.yaml";
+	public static string gameVarFilePath;
+
+	public GameVars gameVars;
+
+	public static Deserializer deserializer = new();
 
 	private string defaultSave;
 
@@ -49,7 +56,8 @@ public class FlagManager : Singleton<FlagManager>
 		["largeCursor"] = false,
 		["familyFriendly"] = false,
 		["forceJollyMode"] = false,
-		["invertY"] = false
+		["invertY"] = false,
+		["lowerSens"] = false
 	};
 
 	public int CountEndings()
@@ -70,8 +78,11 @@ public class FlagManager : Singleton<FlagManager>
 		for (int i = 0; i < flags.Length; i++)
 			defaultSave += "0\n";
 
-		settingsFilePath = Application.persistentDataPath + "\\" + settingsFile;
-		saveFilePath = Application.persistentDataPath + "\\" + saveFile;
+		settingsFilePath = Application.persistentDataPath + Path.DirectorySeparatorChar + settingsFile;
+		saveFilePath = Application.persistentDataPath + Path.DirectorySeparatorChar + saveFile;
+		gameVarFilePath = Application.streamingAssetsPath + Path.DirectorySeparatorChar + gameVarFile;
+
+		gameVars = deserializer.Deserialize<GameVars>(File.ReadAllText(gameVarFilePath));
 	}
 
 	public static string StringBetween(string input, string start, string end)

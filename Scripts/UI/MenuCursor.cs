@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -154,6 +156,9 @@ public class MenuCursor : MonoBehaviour
 
 		center = new Vector2(Mathf.FloorToInt(center.x), Mathf.FloorToInt(center.y));
 		sensitivity = (float)FlagManager.Instance.GetSetting("cursorSensitivity");
+
+		if ((bool)FlagManager.Instance.GetSetting("lowerSens"))
+			sensitivity *= Convert.ToSingle(FlagManager.Instance.gameVars.variables["lowerSensMult"], CultureInfo.InvariantCulture);
 	}
 
 	public void SetCursorEnabled(bool value)

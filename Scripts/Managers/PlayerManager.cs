@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
+using System.Globalization;
 using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 using TweenX;
-using TweenX.EasingStyles.Advanced;
 using TweenX.EasingStyles;
+using TweenX.EasingStyles.Advanced;
+using UnityEngine;
 using UnityEngine.Diagnostics;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -84,8 +85,6 @@ public class PlayerManager : MonoBehaviour
 		controller = GetComponent<CharacterController>();
 
 		Cursor.lockState = CursorLockMode.Locked;
-
-		sensitivity = (float)FlagManager.Instance.GetSetting("sensitivity");
 
 		leo = UnityEngine.Object.FindAnyObjectByType<Leo>();
 
@@ -196,6 +195,11 @@ public class PlayerManager : MonoBehaviour
 	{
 		if (HUDManager.Instance.blockGameInput)
 			return;
+
+		sensitivity = (float)FlagManager.Instance.GetSetting("sensitivity");
+
+		if ((bool)FlagManager.Instance.GetSetting("lowerSens"))
+			sensitivity *= Convert.ToSingle(FlagManager.Instance.gameVars.variables["lowerSensMult"], CultureInfo.InvariantCulture);
 
 		RaycastHit hit;
 		bool click = GameInputManager.Instance.GetAction("Click").WasPressedThisFrame();
