@@ -380,13 +380,13 @@ public class DoubtGameManager : BaseGameManager
 				MusicManager.Instance.PlayTrack(this.bossLoopIntro);
 				npcLeo.audMan.PlaySound(doubtIntro);
 
-				// I know
 				Vector3 targetPos = ec.TileToWorldPos(new Pos2(ec.exitSigns[finalExitId].tilePos), 0f);
-				for (int i = 0; i < 120; i++)
-				{
-					while (plr.transform.position != targetPos)
-						plr.transform.position = targetPos;
-				}
+
+				// Whoever decided the CharacterController prioritizes over .position,
+				// I will skin you alive. (in Minecraft)
+				plr.controller.enabled = false;
+				plr.transform.position = targetPos;
+				plr.controller.enabled = true;
 
 				break;
 			case "doubtHit":

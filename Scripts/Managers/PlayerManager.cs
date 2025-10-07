@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-	CharacterController controller;
+	internal CharacterController controller;
 	public Camera cam;
 
 	public float speed = 0f;
