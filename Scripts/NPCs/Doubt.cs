@@ -3,6 +3,7 @@ using TweenX;
 using TweenX.EasingStyles;
 using TweenX.EasingStyles.Advanced;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public enum DoubtState
@@ -135,7 +136,7 @@ public class Doubt : BaseNPC
 		return dist;
 	}
 
-	public int health = 15;
+	public int health = 1;
 	public float rushSpeed = 10f;
 	private bool reached = false;
 
@@ -152,20 +153,22 @@ public class Doubt : BaseNPC
 	{
 		if (this.state == DoubtState.Idle) return;
 		EnvironmentController.Instance.gameManager.Broadcast("doubtHit");
+		if (health < ((DoubtGameManager)EnvironmentController.Instance.gameManager).doubtHealth && health > 2)
+			StartCoroutine(Stun());
 		health--;
 		if (health <= 1)
 		{
+			StopCoroutine("Stun");
 			audMan.PlaySound(glitchVoiceline);
 			playerMan.frozen = true;
 			state = DoubtState.Idle;
 			EnvironmentController.Instance.ambientColor = Color.black;
-			StartCoroutine(AllOfTheLights());
+			StartCoroutine(AllOfTheLights()); // All of the lights, baby
 			((DoubtGameManager)EnvironmentController.Instance.gameManager).cancelShake = true;
 			twMan.PlayTweenSingle(ref musicSpeed, new Tween(8f, ease, 1f, 0f));
 			Invoke("InitFinale", 9f);
 			return;
 		}
-		StartCoroutine(Stun());
 	}
 
 	// You'd think this'd be really long. It is not.

@@ -4,7 +4,7 @@ public class CoreInitializer : MonoBehaviour
 {
 	public static bool hasLoaded = false;
 	public static Vector2 uiResolution = new Vector2(480, 360);
-	public const string version = "1.2c";
+	public const string version = "1.2d";
 
 	private void Awake()
 	{

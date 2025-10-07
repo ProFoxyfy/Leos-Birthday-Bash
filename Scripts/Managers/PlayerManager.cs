@@ -364,6 +364,9 @@ public class PlayerManager : MonoBehaviour
 	{
 		yield return new WaitForSecondsRealtime(delay);
 		EnvironmentController.Instance.gameManager.Broadcast("tagged");
+		cam.farClipPlane = 0f;
+		cam.nearClipPlane = 10f;
+		cam.Render();
 	}
 
 	IEnumerator CrashDelay(float delay)

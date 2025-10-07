@@ -161,6 +161,7 @@ public class FunMenuManager : MonoBehaviour
 		// inefficient but meh
 		foreach (Leo leo in leos)
 		{
+			if (leo == null) continue;
 			leo.canEndGameFun = !noClip.value;
 			leo.blindFun = blindLeo.value;
 		}

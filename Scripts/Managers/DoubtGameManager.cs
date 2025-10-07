@@ -49,9 +49,11 @@ public class DoubtGameManager : BaseGameManager
 	private bool finalExit = false;
 	private int finalExitId = 0;
 
+	internal int doubtHealth = 8;
+
 	public override void Init()
 	{
-		ec = FindObjectOfType<EnvironmentController>();
+		ec = EnvironmentController.Instance;
 		ec.itmData = Resources.Load<ItemData>("BaseItems");
 		objectivePrefab = Resources.Load<GameObject>("Objective");
 		projectilePrefab = Resources.Load<GameObject>("Projectile");
@@ -337,6 +339,7 @@ public class DoubtGameManager : BaseGameManager
 
 	private void EndIntro()
 	{
+		npcLeo.state = DoubtState.Chase;
 		MusicManager.Instance.PlayTrack(bossLoop);
 		StartCoroutine(StartShake());
 	}
@@ -362,9 +365,10 @@ public class DoubtGameManager : BaseGameManager
 				plr.disableSprint = true;
 				doExit = true;
 				Pos2 position = new Pos2(ec.exitSigns[finalExitId].tilePos + Vector2Int.right * 2);
-				plr.transform.position = ec.TileToWorldPos(new Pos2(ec.exitSigns[finalExitId].tilePos), 0f);
-				SpawnProjectile(position);
 
+				npcLeo.health = doubtHealth;
+
+				SpawnProjectile(position);
 				StartCoroutine(RespawnProjectiles());
 
 				HUDManager.Instance.Disable();
@@ -375,9 +379,18 @@ public class DoubtGameManager : BaseGameManager
 
 				MusicManager.Instance.PlayTrack(this.bossLoopIntro);
 				npcLeo.audMan.PlaySound(doubtIntro);
+
+				// I know
+				Vector3 targetPos = ec.TileToWorldPos(new Pos2(ec.exitSigns[finalExitId].tilePos), 0f);
+				for (int i = 0; i < 120; i++)
+				{
+					while (plr.transform.position != targetPos)
+						plr.transform.position = targetPos;
+				}
+
 				break;
 			case "doubtHit":
-				if (npcLeo.health == 10)
+				if (npcLeo.health == doubtHealth)
 				{
 					// shut up doubt bla bla thank you
 					npcLeo.audMan.StopAllSounds();
@@ -387,7 +400,9 @@ public class DoubtGameManager : BaseGameManager
 					Invoke("EndIntro", doubtHitFirst.clip.length);
 					return;
 				}
-				npcLeo.health--;
+
+				// Removed duplicate health deduction, that was causing the problem woops
+
 				abberationStrength = 0.3f;
 				npcLeo.audMan.PlayOneShot(doubtHit);
 
@@ -402,6 +417,7 @@ public class DoubtGameManager : BaseGameManager
 				projectileCount--;
 				break;
 			case "tagged":
+				ec.UnloadLevel();
 				retryScreen.SetActive(true);
 				retryScript.FadeIn();
 				break;

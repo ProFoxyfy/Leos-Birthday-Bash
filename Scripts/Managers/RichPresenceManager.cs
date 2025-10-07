@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class RichPresenceManager : Singleton<RichPresenceManager>
 {
 #nullable enable
-	const long CLIENT_ID = 0; // uhh no
+	const long CLIENT_ID = 0; // nuh uh
 	Discord.Discord dc;
 	public bool loaded = false;
 	private long startTime = 0;
@@ -30,6 +30,7 @@ public class RichPresenceManager : Singleton<RichPresenceManager>
 
 	public void Init()
 	{
+		// y this no run???
 		dc = new(CLIENT_ID, (ulong)CreateFlags.NoRequireDiscord);
 
 		dc.SetLogHook(LogLevel.Debug, (level, message) =>
